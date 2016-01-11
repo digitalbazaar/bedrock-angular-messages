@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-sm-offset-2 col-sm-8">
+    <div ng-if="model.messages.length == 0">
+      <h3>You have no messages.</h3>
+    </div>
+    <table class="table table-condensed" ng-if="model.messages.length > 0">
+        <thead>
+          <tr>
+            <th class="name br-nowrap" ng-click="model.sortClick('subject')">
+              Subject
+              <i class="fa fa-sort-up" ng-show="model.sorting.subject == '+'"></i>
+              <i class="fa fa-sort-down" ng-show="model.sorting.subject == '-'"></i>
+            </th>
+            <th class="br-compact br-nowrap" ng-click="model.sortClick('date')">
+              Date
+              <i class="fa fa-sort-up" ng-show="model.sorting.date == '+'"></i>
+              <i class="fa fa-sort-down" ng-show="model.sorting.date == '-'"></i>
+            </th>
+            <th class="action">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="message in model.messages | orderBy:model.orderBy"
+            class="br-fadein br-fadeout">
+            <!-- label -->
+            <!-- FIXME: this will display subject -->
+            <!-- do we need a more generalized class for bolding? -->
+            <td class="name" ng-class="{'ui-select-highlight': !message.meta.read}">
+                <a ng-click="model.view(message._id)">{{message._id}}</a>
+            </td>
+            <!-- issued -->
+            <td class="br-compact br-nowrap" ng-class="{'ui-select-highlight': !message.meta.read}">
+              {{message.content.date|date:'yyyy-MM-dd'}}
+            </td>
+            <!-- action -->
+            <td class="br-action">
+              <br-action-menu>
+                <ul class="dropdown-menu stackable-menu">
+                  <li ng-show="credential.claim.id == model.identity.id" class="alert-danger">
+                    <a class="stackable-cancel" ng-click="model.modals.credential=credential; model.modals.showDeleteCredentialAlert=true">
+                      <i class="fa fa-remove"></i> Delete
+                    </a>
+                  </li>
+                </ul>
+              </br-action-menu>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+</div>
