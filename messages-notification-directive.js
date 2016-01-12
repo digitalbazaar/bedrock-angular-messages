@@ -6,12 +6,13 @@ define(['angular'], function(angular) {
 'use strict';
 
 /* @ngInject */
-function factory(
-  $interval, $location, brIdentityService, brMessagesService,
-  brSessionService) {
+function factory($interval, $location, brMessagesService) {
   return {
     restrict: 'E',
-    scope: {},
+    scope: {
+      id: '=brId',
+      identityUrl: '=brIdentityUrl'
+    },
     templateUrl: requirejs.toUrl(
       'bedrock-angular-messages/messages-notification.html'),
     link: Link
@@ -19,28 +20,17 @@ function factory(
 
   function Link(scope, elem, attrs) {
     var model = scope.model = {};
-    model.loggedIn = false;
-    model.unreadCount = 0;
     model.messagesService = brMessagesService;
-    var identityBaseUrl = null;
 
     init();
 
-    scope.$watch(function() {
-      return brSessionService.session.identity;
-    }, function(identity) {
-      model.loggedIn = !!identity;
-      init();
-    });
-
     model.viewMessages = function() {
-      $location.url(identityBaseUrl + '/messages');
+      $location.url(scope.identityUrl + '/messages');
     };
 
     function init() {
-      if(model.loggedIn) {
-        identityBaseUrl =
-          brIdentityService.generateUrl({identityMethod: 'relative'});
+      if(scope.id) {
+        checkMessages();
         $interval(checkMessages, 30000);
       }
     }

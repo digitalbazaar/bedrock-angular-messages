@@ -39,15 +39,6 @@ module.config(function($routeProvider) {
     });
 });
 
-/* @ngInject */
-// module.run(function(brNavbarService, brSessionService, config) {
-//   config.site = config.site || {};
-//   config.site.navbar = config.site.navbar || {};
-//   config.site.navbar.templates = config.site.navbar.templates || [];
-//   config.site.navbar.templates.push(requirejs.toUrl(
-//     'bedrock-angular-messages/navbar/messages-notification.html'));
-// });
-
 return module.name;
 
 });
