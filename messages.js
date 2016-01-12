@@ -30,10 +30,12 @@ module.config(function($routeProvider) {
   $routeProvider
     .when(basePath + '/:identity/messages', {
       title: 'Messages',
+      session: 'required',
       templateUrl: requirejs.toUrl('bedrock-angular-messages/messages.html')
     })
     .when('/messages/:id', {
       title: 'Message',
+      session: 'required',
       templateUrl:
         requirejs.toUrl('bedrock-angular-messages/message.html')
     });

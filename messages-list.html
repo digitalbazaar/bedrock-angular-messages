@@ -1,51 +1,72 @@
 <div class="row">
-  <div class="col-sm-offset-2 col-sm-8">
-    <div ng-if="model.messages.length == 0">
-      <h3>You have no messages.</h3>
+  <div class="row">
+    <h1 class="headline col-md-12">Messages
+  </div>
+  <div ng-if="model.loading" class="row">
+    <h4 class="col-md-12">Loading <i class="fa fa-refresh fa-spin text-muted"></i></h4>
+  </div>
+  <div ng-show="!model.loading" class="col-sm-offset-2 col-sm-8">
+    <div class="alert alert-success" ng-show="model.showDeleteSuccessAlert">
+      <strong ng-if="model.inboxActive">Messages successfully archived</strong>
+      <strong ng-if="model.archiveActive">Messages successfully deleted</strong>
     </div>
-    <table class="table table-condensed" ng-if="model.messages.length > 0">
+    <div class="alert alert-danger" ng-show="model.showDeleteFailAlert">
+      <strong ng-if="model.inboxActive">Error: Messages could not be archived</strong>
+      <strong ng-if="model.archiveActive">Error: Messages could not be deleted</strong>
+    </div>
+    <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+      <li ng-class="{active: model.inboxActive}" ng-click="model.inboxTab()"><a href="#">Inbox</a></li>
+      <li ng-class="{active: model.archiveActive}" ng-click="model.archiveTab()"><a href="#">Archive</a></li>
+    </ul>
+    <div ng-if="model.totalMessages == 0 && !model.loading">
+      <h3 ng-if="model.inboxActive">You have no messages.</h3>
+      <h3 ng-if="model.archiveActive">You have no archived messages.</h3>
+    </div>
+    <br-infinite-scroll br-paging-function="model.pagingFunction(limit, offset, done)" br-total-amount="model.totalMessages" br-limit-amount="10", br-loading="model.scrollLoading">
+      <table ng-cloak class="table table-condensed table-responsive" ng-if="model.messages.length > 0">
         <thead>
           <tr>
-            <th class="name br-nowrap" ng-click="model.sortClick('subject')">
-              Subject
-              <i class="fa fa-sort-up" ng-show="model.sorting.subject == '+'"></i>
-              <i class="fa fa-sort-down" ng-show="model.sorting.subject == '-'"></i>
+            <th ng-if="model.inboxActive">
+              Archive
             </th>
-            <th class="br-compact br-nowrap" ng-click="model.sortClick('date')">
+            <th ng-if="model.archiveActive">
+              Delete
+            </th>
+            <th class="name" ng-click="model.sortClick('subject')">
+              Subject
+              <i class="" ng-show=""></i>
+              <i class="" ng-show=""></i>
+            </th>
+            <th class="br-compact" ng-click="model.sortClick('date')">
               Date
               <i class="fa fa-sort-up" ng-show="model.sorting.date == '+'"></i>
               <i class="fa fa-sort-down" ng-show="model.sorting.date == '-'"></i>
             </th>
-            <th class="action">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="message in model.messages | orderBy:model.orderBy"
-            class="br-fadein br-fadeout">
+          <tr ng-repeat="message in model.messages | orderBy:model.orderBy">
+            <!-- delete checkbox -->
+            <td class="br-nowrap br-compact">
+                <input type="checkbox" ng-model="message.selected"/>
+            </td>
             <!-- label -->
             <!-- FIXME: this will display subject -->
             <!-- do we need a more generalized class for bolding? -->
-            <td class="name" ng-class="{'ui-select-highlight': !message.meta.read}">
-                <a ng-click="model.view(message._id)">{{message._id}}</a>
+            <td class="name br-nowrap" ng-class="{'ui-select-highlight': !message.meta.read}">
+                <a ng-click="model.view(message.id)">{{message.subject}}</a>
             </td>
             <!-- issued -->
             <td class="br-compact br-nowrap" ng-class="{'ui-select-highlight': !message.meta.read}">
-              {{message.content.date|date:'yyyy-MM-dd'}}
-            </td>
-            <!-- action -->
-            <td class="br-action">
-              <br-action-menu>
-                <ul class="dropdown-menu stackable-menu">
-                  <li ng-show="credential.claim.id == model.identity.id" class="alert-danger">
-                    <a class="stackable-cancel" ng-click="model.modals.credential=credential; model.modals.showDeleteCredentialAlert=true">
-                      <i class="fa fa-remove"></i> Delete
-                    </a>
-                  </li>
-                </ul>
-              </br-action-menu>
+              {{message.date|date:'medium'}}
             </td>
           </tr>
         </tbody>
       </table>
+    </br-infinite-scroll>
+    <div>
+      <button ng-if="model.inboxActive" type="button" class="btn btn-primary" ng-show="model.shouldShowDeleteButton()" ng-click="model.archiveSelected()">Archive selected</button>
+      <button ng-if="model.archiveActive" type="button" class="btn btn-primary" ng-show="model.shouldShowDeleteButton()" ng-click="model.deleteSelected()">Delete selected</button>
+    </div>
   </div>
 </div>
