@@ -6,7 +6,7 @@ define([], function() {
 'use strict';
 
 /* @ngInject */
-function factory($http, config, brIdentityService) {
+function factory($http, config) {
   var service = {};
   service.unreadCount = 0;
   var messagesEndpoint =
@@ -18,22 +18,23 @@ function factory($http, config, brIdentityService) {
     return Promise.resolve(
       $http({method: 'GET', url: messagesEndpoint + '/' + id}));
   };
-  service.getAll = function() {
+  service.getAll = function(options) {
+    var url = searchEndpoint;
+    if(options && options.recipient) {
+      url = searchEndpoint + '/' + options.recipient;
+    }
     return Promise.resolve(
-      $http({method: 'POST', url: searchEndpoint + '/' +
-      brIdentityService.identity.id}))
-      .then(function(results) {
-        var messages = results.data;
-        service.unreadCount = messages.filter(function(message) {
-          return !message.meta.read;
-        }).length;
-        console.log('UNREAD MESSAGES', service.unreadCount);
-        return new Promise(function(resolve, reject) {
-          resolve(results);
+      $http({method: 'POST', url: url}))
+        .then(function(results) {
+          var messages = results.data;
+          service.unreadCount = messages.filter(function(message) {
+            return !message.meta.read;
+          }).length;
+          return new Promise(function(resolve, reject) {
+            resolve(results);
+          });
         });
-      });
   };
-
   return service;
 }
 
