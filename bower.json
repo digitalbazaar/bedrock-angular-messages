@@ -7,7 +7,8 @@
     "bower_components"
   ],
   "dependencies": {
-    "bedrock-angular": "^1.0.0"
+    "bedrock-angular": "^1.0.0",
+    "bedrock-angular-paging": "digitalbazaar/bedrock-angular-paging#master"
   },
   "resolutions": {
     "angular": ">=1.3.0"
