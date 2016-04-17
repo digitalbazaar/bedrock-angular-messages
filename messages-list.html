@@ -22,7 +22,7 @@
       <h3 ng-if="model.inboxActive">You have no messages.</h3>
       <h3 ng-if="model.archiveActive">You have no archived messages.</h3>
     </div>
-    <br-infinite-scroll br-paging-function="model.pagingFunction(limit, offset, done)" br-total-amount="model.totalMessages" br-limit-amount="10", br-loading="model.scrollLoading">
+    <br-infinite-scroll br-on-load-page="model.onLoadPage(limit, offset)" br-total-amount="model.totalMessages" br-limit-amount="10", br-loading="model.scrollLoading">
       <table ng-cloak class="table table-condensed table-responsive" ng-if="model.messages.length > 0">
         <thead>
           <tr>

@@ -6,7 +6,7 @@ define([], function() {
 'use strict';
 
 /* @ngInject */
-function factory(brMessagesService, $location) {
+function factory($timeout, $location, brMessagesService) {
   return {
     restrict: 'E',
     scope: {
@@ -46,19 +46,17 @@ function factory(brMessagesService, $location) {
     // first gets instantiated, we don't want to display the
     // loading widget on this part.
     model.firstLoad = true;
-    model.pagingFunction = function(limit, offset, done) {
+    model.onLoadPage = function(limit) {
       model.limit = limit;
       if(!model.firstLoad) {
         model.scrollLoading = true;
       }
       model.firstLoad = false;
-      setTimeout(function() {
+      return $timeout(function() {
         processMessageLists();
         if(!model.firstLoad) {
           model.scrollLoading = false;
         }
-        scope.$apply();
-        done();
       }, 30);
     };
 
