@@ -8,6 +8,6 @@
   ],
   "dependencies": {
     "bedrock-angular": "^2.0.0",
-    "bedrock-angular-paging": "digitalbazaar/bedrock-angular-paging#master"
+    "bedrock-angular-paging": "^1.0.0"
   }
 }

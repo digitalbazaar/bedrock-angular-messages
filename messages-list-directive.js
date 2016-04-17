@@ -37,7 +37,7 @@ function factory($timeout, $location, brMessagesService) {
     }
     model.scrollLoading = false;
 
-    model.limit = 0;
+    model.limit = 10;
 
     var allMessages = [];
     processMessageLists();
@@ -46,17 +46,10 @@ function factory($timeout, $location, brMessagesService) {
     // first gets instantiated, we don't want to display the
     // loading widget on this part.
     model.firstLoad = true;
-    model.onLoadPage = function(limit) {
-      model.limit = limit;
-      if(!model.firstLoad) {
-        model.scrollLoading = true;
-      }
+    model.onLoadPage = function() {
       model.firstLoad = false;
       return $timeout(function() {
         processMessageLists();
-        if(!model.firstLoad) {
-          model.scrollLoading = false;
-        }
       }, 30);
     };
 
