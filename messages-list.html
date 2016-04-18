@@ -22,7 +22,7 @@
       <h3 ng-if="model.inboxActive">You have no messages.</h3>
       <h3 ng-if="model.archiveActive">You have no archived messages.</h3>
     </div>
-    <br-infinite-scroll br-on-load-page="model.onLoadPage()" br-can-scroll="(model.totalMessages - model.messages.length) > 0">
+    <br-infinite-scroller br-on-load-page="model.onLoadPage()" br-can-scroll="(model.totalMessages - model.messages.length) > 0">
       <table ng-cloak class="table table-condensed table-responsive" ng-if="model.messages.length > 0">
         <thead>
           <tr>
@@ -63,7 +63,7 @@
           </tr>
         </tbody>
       </table>
-    </br-infinite-scroll>
+    </br-infinite-scroller>
     <div>
       <button ng-if="model.inboxActive" type="button" class="btn btn-primary" ng-show="model.shouldShowDeleteButton()" ng-click="model.archiveSelected()">Archive selected</button>
       <button ng-if="model.archiveActive" type="button" class="btn btn-primary" ng-show="model.shouldShowDeleteButton()" ng-click="model.deleteSelected()">Delete selected</button>

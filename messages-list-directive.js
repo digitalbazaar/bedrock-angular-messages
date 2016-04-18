@@ -38,6 +38,7 @@ function factory($timeout, $location, brMessagesService) {
     model.scrollLoading = false;
 
     model.limit = 10;
+    model.pageAmount = 10;
 
     var allMessages = [];
     processMessageLists();
@@ -48,6 +49,8 @@ function factory($timeout, $location, brMessagesService) {
     model.firstLoad = true;
     model.onLoadPage = function() {
       model.firstLoad = false;
+      model.limit = model.limit + model.pageAmount;
+      console.log("Called page load");
       return $timeout(function() {
         processMessageLists();
       }, 30);
@@ -90,6 +93,7 @@ function factory($timeout, $location, brMessagesService) {
       model.archiveActive = false;
       model.showDeleteSuccessAlert = false;
       model.showDeleteFailAlert = false;
+      model.limit = 10;
       allMessages.forEach(function(message) {
         message.selected = false;
       });
@@ -102,6 +106,7 @@ function factory($timeout, $location, brMessagesService) {
       model.archiveActive = true;
       model.showDeleteSuccessAlert = false;
       model.showDeleteFailAlert = false;
+      model.limit = 10;
       allMessages.forEach(function(message) {
         message.selected = false;
       });
