@@ -55,11 +55,11 @@
     </div>
     <div class="row" style="margin-top: 30px;">
       <div class="col-sm-2">
-        <button ng-if="model.message.meta.archived" type="button" class="btn btn-danger" ng-click="model.delete()" style="" ng-click="">Delete</button>
-        <button ng-if="!model.message.meta.archived" type="button" class="btn btn-danger" ng-click="model.archive()" style="" ng-click="">Archive</button>
+        <button ng-if="model.message.meta.archived" type="button" class="btn btn-danger" ng-click="model.delete()">Delete</button>
+        <button ng-if="!model.message.meta.archived" type="button" class="btn btn-danger" ng-click="model.archive()">Archive</button>
       </div>
       <div class="col-sm-3">
-        <button type="button" class="btn btn-primary" ng-click="model.viewMessages()" style="" ng-click="">Return To Messages</button>
+        <button type="button" class="btn btn-primary" ng-click="model.viewMessages()">Return To Messages</button>
       </div>
     </div>
   </div>
@@ -71,7 +71,7 @@
   </div>
   <div class="row">
     <div class="col-sm-offset-5 col-sm-3">
-      <button style="margin-top: 40px;" type="button" class="btn btn-primary" ng-click="model.viewMessages()" style="" ng-click="">Return To Messages</button>
+      <button style="margin-top: 40px;" type="button" class="btn btn-primary" ng-click="model.viewMessages()">Return To Messages</button>
     </div>
   </div>
 </div>
