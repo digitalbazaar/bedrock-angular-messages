@@ -31,13 +31,15 @@ function factory(brMessagesService, $routeParams, $location) {
         brMessagesService.getAll()
           .then(function(result) {
             var messages = result.data;
-            // Only pull in messages that belong to the same archived class as the current message
+            // Only pull in messages that belong to the same archived class as
+            // the current message
             model.messages = messages.filter(function(message) {
               return message.meta.archived === model.message.meta.archived;
             });
             // Sort the messages by date
             model.messages.sort(function(message1, message2) {
-              return new Date(message1.content.date).getTime() - new Date(message2.content.date).getTime();
+              return new Date(message1.content.date).getTime() -
+                new Date(message2.content.date).getTime();
             });
             // Take the message's index so we can operate previous/next
             model.index = model.messages.findIndex(function(message) {
