@@ -11,7 +11,7 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock.messages', []);
+var module = angular.module('bedrock.messages', ['bedrock.paging']);
 
 Array.prototype.slice.call(arguments, 1).forEach(function(register) {
   register(module);
