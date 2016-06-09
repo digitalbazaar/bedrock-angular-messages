@@ -1,0 +1,7 @@
+<a ng-click="$ctrl.viewMessages()" class="btn navbar-btn navbar-link pull-right">
+  <i class="fa fa-inbox"></i> Messages <span class="badge" ng-if="$ctrl.messagesService.unreadCount > 0" style="background-color: #337AB7;">
+    {{$ctrl.messagesService.unreadCount}}</span>
+    <span class="badge" ng-if="$ctrl.messagesService.unreadCount === 0">
+      {{$ctrl.messagesService.unreadCount}}
+    </span>
+</a>

@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="row">
+    <h1 class="headline col-md-12">Messages</h1>
+  </div>
+  <div ng-if="$ctrl.loading" class="row">
+    <h4 class="col-md-12">Loading <i class="fa fa-refresh fa-spin text-muted"></i></h4>
+  </div>
+  <div ng-show="!$ctrl.loading" class="col-sm-offset-2 col-sm-8">
+    <div class="alert alert-success" ng-show="$ctrl.showDeleteSuccessAlert">
+      <strong ng-if="$ctrl.inboxActive">Messages successfully archived</strong>
+      <strong ng-if="$ctrl.archiveActive">Messages successfully deleted</strong>
+    </div>
+    <div class="alert alert-danger" ng-show="$ctrl.showDeleteFailAlert">
+      <strong ng-if="$ctrl.inboxActive">Error: Messages could not be archived</strong>
+      <strong ng-if="$ctrl.archiveActive">Error: Messages could not be deleted</strong>
+    </div>
+    <ul class="nav nav-tabs" style="margin-bottom: 20px;">
+      <li ng-class="{active: $ctrl.inboxActive}" ng-click="$ctrl.inboxTab()"><a href="#">Inbox</a></li>
+      <li ng-class="{active: $ctrl.archiveActive}" ng-click="$ctrl.archiveTab()"><a href="#">Archive</a></li>
+    </ul>
+    <div ng-if="$ctrl.totalMessages == 0 && !$ctrl.loading">
+      <h3 ng-if="$ctrl.inboxActive">You have no messages.</h3>
+      <h3 ng-if="$ctrl.archiveActive">You have no archived messages.</h3>
+    </div>
+    <br-infinite-scroller br-on-load-page="$ctrl.onLoadPage()" br-can-scroll="($ctrl.totalMessages - $ctrl.messages.length) > 0">
+      <table ng-cloak class="table table-condensed table-responsive" ng-if="$ctrl.messages.length > 0">
+        <thead>
+          <tr>
+            <th ng-if="$ctrl.inboxActive">
+              Archive
+            </th>
+            <th ng-if="$ctrl.archiveActive">
+              Delete
+            </th>
+            <th class="name" ng-click="$ctrl.sortClick('subject')">
+              Subject
+              <i class="" ng-show=""></i>
+              <i class="" ng-show=""></i>
+            </th>
+            <th class="br-compact" ng-click="$ctrl.sortClick('date')">
+              Date
+              <i class="fa fa-sort-up" ng-show="$ctrl.sorting.date == '+'"></i>
+              <i class="fa fa-sort-down" ng-show="$ctrl.sorting.date == '-'"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="message in $ctrl.messages | orderBy:$ctrl.orderBy">
+            <!-- delete checkbox -->
+            <td class="br-nowrap br-compact">
+                <input type="checkbox" ng-model="message.selected"/>
+            </td>
+            <!-- label -->
+            <!-- FIXME: this will display subject -->
+            <!-- do we need a more generalized class for bolding? -->
+            <td class="name br-nowrap" ng-class="{'ui-select-highlight': !message.meta.read}">
+                <a ng-click="$ctrl.view(message.id)">{{message.subject}}</a>
+            </td>
+            <!-- issued -->
+            <td class="br-compact br-nowrap" ng-class="{'ui-select-highlight': !message.meta.read}">
+              {{message.date|date:'medium'}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </br-infinite-scroller>
+    <div>
+      <button ng-if="$ctrl.inboxActive && $ctrl.showDeleteButton()"
+        type="button" class="btn btn-primary"
+        ng-click="$ctrl.archiveSelected()">
+        Archive selected
+      </button>
+      <button ng-if="$ctrl.archiveActive && $ctrl.showDeleteButton()"
+        type="button" class="btn btn-primary"
+        ng-click="$ctrl.deleteSelected()">
+        Delete selected
+      </button>
+    </div>
+  </div>
+</div>

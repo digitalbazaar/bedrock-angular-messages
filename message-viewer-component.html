@@ -1,0 +1,77 @@
+<div ng-if="$ctrl.message" class="row">
+  <div class="row">
+    <h1 class="headline">View Messages</h1>
+  </div>
+  <div class="row">
+    <h4 ng-if="$ctrl.loading" class="col-sm-offset-2 col-sm-8">Loading <i class="fa fa-refresh fa-spin text-muted"></i></h4>
+  </div>
+  <div ng-show="!$ctrl.loading" class="col-sm-offset-2 col-sm-8">
+    <div class="row alert alert-danger" ng-show="$ctrl.showFailAlert">
+      <strong ng-if="!$ctrl.message.meta.archived">Error: Message could not be archived</strong>
+      <strong ng-if="$ctrl.message.meta.archived">Error: Message could not be deleted</strong>
+    </div>
+    <div class="row" style="border-bottom: 1px solid #666; margin-bottom: 20px;">
+      <div class="col-xs-7">
+        <h4>Message</h4>
+      </div>
+      <div class="col-xs-2 text-nowrap text-right">
+        <a ng-if="$ctrl.index > 0" ng-click="$ctrl.view($ctrl.messages[$ctrl.index - 1].id)"><h4><span class="glyphicon glyphicon-chevron-left"/>Older</h4></a>
+      </div>
+      <div class="col-xs-offset-1 col-xs-1 text-nowrap text-right">
+        <a ng-if="$ctrl.index < $ctrl.messages.length - 1" ng-click="$ctrl.view($ctrl.messages[$ctrl.index + 1].id)"><h4>Newer<span class="glyphicon glyphicon-chevron-right"/></h4></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        <strong>From</strong>
+      </div>
+      <div class="col-md-11">
+        <p>{{$ctrl.message.sender}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        <strong>Date</strong>
+      </div>
+      <div class="col-md-11">
+        <p>{{$ctrl.message.date|date:'medium'}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        <strong>Subject</strong>
+      </div>
+      <div class="col-md-11">
+        <p>{{$ctrl.message.subject}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-1">
+        <strong>Body</strong>
+      </div>
+      <div class="col-md-11">
+        <p ng-bind-html="$ctrl.message.content.body"></p>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-sm-2">
+        <button ng-if="$ctrl.message.meta.archived" type="button" class="btn btn-danger" ng-click="$ctrl.delete()">Delete</button>
+        <button ng-if="!$ctrl.message.meta.archived" type="button" class="btn btn-danger" ng-click="$ctrl.archive()">Archive</button>
+      </div>
+      <div class="col-sm-3">
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.viewMessages()">Return To Messages</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-show="!$ctrl.loading" ng-if="$ctrl.message == null" class="row">
+  <div class="row">
+    <h1 class="headline">Error retrieving message</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-5 col-sm-3">
+      <button style="margin-top: 40px;" type="button" class="btn btn-primary" ng-click="$ctrl.viewMessages()">Return To Messages</button>
+    </div>
+  </div>
+</div>
