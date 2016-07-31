@@ -10,6 +10,7 @@
   ],
   "dependencies": {
     "bedrock-angular": "^2.0.0",
+    "bedrock-angular-alert": "^2.1.0",
     "bedrock-angular-paging": "^1.0.0"
   }
 }

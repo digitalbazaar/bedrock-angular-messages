@@ -14,7 +14,8 @@ function register(module) {
 }
 
 /* @ngInject */
-function Ctrl($routeParams, $location, $scope, brMessagesService) {
+function Ctrl(
+  $routeParams, $location, $scope, brMessagesService, brAlertService) {
   var self = this;
   self.message = null;
   self.loading = true;
@@ -22,30 +23,36 @@ function Ctrl($routeParams, $location, $scope, brMessagesService) {
   brMessagesService.get($routeParams.id)
     .then(function(result) {
       self.message = result.data;
+    })
       // TODO: In order to operate prev/next buttons, we have to pull
       // in all of the user's messages -- would be nice if
       // there was an endpoint that only pulled in a limited
       // number of the user's messages
-      brMessagesService.getAll()
-        .then(function(result) {
-          var messages = result.data;
-          // Only pull in messages that belong to the same archived class as
-          // the current message
-          self.messages = messages.filter(function(message) {
-            return message.meta.archived === self.message.meta.archived;
-          });
-          // Sort the messages by date
-          self.messages.sort(function(message1, message2) {
-            return new Date(message1.content.date).getTime() -
-              new Date(message2.content.date).getTime();
-          });
-          // Take the message's index so we can operate previous/next
-          self.index = self.messages.findIndex(function(message) {
-            return message.id === $routeParams.id;
-          });
-          self.loading = false;
-          $scope.$apply();
+    .then(function() {
+      return brMessagesService.getAll().then(function(result) {
+        var messages = result.data;
+        // Only pull in messages that belong to the same archived class as
+        // the current message
+        self.messages = messages.filter(function(message) {
+          return message.meta.archived === self.message.meta.archived;
         });
+        // Sort the messages by date
+        self.messages.sort(function(message1, message2) {
+          return new Date(message1.content.date).getTime() -
+            new Date(message2.content.date).getTime();
+        });
+        // Take the message's index so we can operate previous/next
+        self.index = self.messages.findIndex(function(message) {
+          return message.id === $routeParams.id;
+        });
+      });
+    })
+    .catch(function(err) {
+      brAlertService.add('error', err, {scope: $scope});
+    })
+    .then(function() {
+      self.loading = false;
+      $scope.$apply();
     });
 
   self.view = function(id) {
