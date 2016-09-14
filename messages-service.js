@@ -20,6 +20,11 @@ function factory($http, config) {
   var searchEndpoint =
     config.data['bedrock-angular-messages'].endpoints.messagesSearch;
   service.messageListUrl = '';
+  if(!messagesEndpoint) {
+    throw new Error(
+      'bedrock-angular-messages messages endpoint not configured; is ' +
+      'bedrock-messages installed on the server?');
+  }
 
   service.get = function(id) {
     return Promise.resolve(
@@ -38,14 +43,19 @@ function factory($http, config) {
     }
 
     return Promise.resolve(
-      $http({method: 'GET', url: url + query}))
-        .then(function(results) {
-          var messages = results.data;
-          service.unreadCount = messages.filter(function(message) {
-            return !message.meta.read && !message.meta.archived;
-          }).length;
-          return results;
-        });
+      $http({
+        method: 'GET',
+        url: url + query,
+        headers: {
+          'Accept': 'application/ld+json, application/json'
+        }
+      })).then(function(results) {
+        var messages = results.data;
+        service.unreadCount = messages.filter(function(message) {
+          return !message.meta.read && !message.meta.archived;
+        }).length;
+        return results;
+      });
   };
 
   service.delete = function(message) {
