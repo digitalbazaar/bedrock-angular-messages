@@ -1,5 +1,8 @@
 # bedrock-angular-messages ChangeLog
 
+### Fixed
+- Better error handling when message endpoints are not configured.
+
 ## 2.0.0 - 2016-06-09
 
 ### Changed
