@@ -1,5 +1,10 @@
 # bedrock-angular-messages ChangeLog
 
+### Fixed
+- Require `bedrock-messages` when using bedrock config. This
+  ensures proper load order and availability of configuration
+  options.
+
 ## 2.0.1 - 2016-09-14
 
 ### Fixed
