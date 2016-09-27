@@ -1,9 +1,14 @@
 # bedrock-angular-messages ChangeLog
 
+## 2.0.2 - 2016-09-27
+
 ### Fixed
 - Require `bedrock-messages` when using bedrock config. This
   ensures proper load order and availability of configuration
   options.
+
+### Changed
+- Add protractor pages.
 
 ## 2.0.1 - 2016-09-14
 
