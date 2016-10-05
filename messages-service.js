@@ -15,10 +15,6 @@ function factory($http, config) {
   service.unreadCount = 0;
   var messagesEndpoint =
     config.data['bedrock-angular-messages'].endpoints.messages;
-  var messagesBatchEndpoint =
-    config.data['bedrock-angular-messages'].endpoints.messagesBatch;
-  var searchEndpoint =
-    config.data['bedrock-angular-messages'].endpoints.messagesSearch;
   service.messageListUrl = '';
   if(!messagesEndpoint) {
     throw new Error(

@@ -10,7 +10,7 @@ function register(module) {
   module.component('brMessagesNotification', {
     bindings: {
       id: '<brId',
-      identityUrl: '<brIdentityUrl'
+      identityUrl: '<?brIdentityUrl'
     },
     controller: Ctrl,
     templateUrl: requirejs.toUrl(
@@ -20,6 +20,7 @@ function register(module) {
 
 function Ctrl($interval, $location, $route, $scope, brMessagesService) {
   var self = this;
+  self.identityUrl = self.identityUrl || "";
   self.messagesService = brMessagesService;
   brMessagesService.setMessageListUrl(self.identityUrl + '/messages');
   init();
