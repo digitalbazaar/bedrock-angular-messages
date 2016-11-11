@@ -1,5 +1,10 @@
 # bedrock-angular-messages ChangeLog
 
+## 3.0.1 - 2016-11-11
+
+### Fixed
+- Add wait in test helper.
+
 ## 3.0.0 - 2016-11-11
 
 ### Changed
