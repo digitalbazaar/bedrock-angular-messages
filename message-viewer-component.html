@@ -15,10 +15,10 @@
         <h4>Message</h4>
       </div>
       <div class="col-xs-2 text-nowrap text-right">
-        <a ng-if="$ctrl.index > 0" ng-click="$ctrl.view($ctrl.messages[$ctrl.index - 1].id)"><h4><span class="glyphicon glyphicon-chevron-left"/>Older</h4></a>
+        <a ng-if="$ctrl.index > 0" ng-click="$ctrl.view($ctrl.messages[$ctrl.index - 1].id)"><h4><span class="glyphicon glyphicon-chevron-left"/>Newer</h4></a>
       </div>
       <div class="col-xs-offset-1 col-xs-1 text-nowrap text-right">
-        <a ng-if="$ctrl.index < $ctrl.messages.length - 1" ng-click="$ctrl.view($ctrl.messages[$ctrl.index + 1].id)"><h4>Newer<span class="glyphicon glyphicon-chevron-right"/></h4></a>
+        <a ng-if="$ctrl.index < $ctrl.messages.length - 1" ng-click="$ctrl.view($ctrl.messages[$ctrl.index + 1].id)"><h4>Older<span class="glyphicon glyphicon-chevron-right"/></h4></a>
       </div>
     </div>
     <div class="row">
@@ -55,11 +55,13 @@
     </div>
     <div class="row" style="margin-top: 30px;">
       <div class="col-sm-2">
-        <button ng-if="$ctrl.message.meta.archived" type="button" class="btn btn-danger" ng-click="$ctrl.delete()">Delete</button>
-        <button ng-if="!$ctrl.message.meta.archived" type="button" class="btn btn-danger" ng-click="$ctrl.archive()">Archive</button>
+        <button ng-if="$ctrl.message.meta.archived"
+          type="button" class="btn btn-danger" ng-click="$ctrl.delete()">Delete</button>
+        <button ng-if="!$ctrl.message.meta.archived"
+          type="button" class="btn btn-danger" ng-click="$ctrl.archive()">Archive</button>
       </div>
       <div class="col-sm-3">
-        <button type="button" class="btn btn-primary" ng-click="$ctrl.viewMessages()">Return To Messages</button>
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.viewMessages()">Return to Messages</button>
       </div>
     </div>
   </div>

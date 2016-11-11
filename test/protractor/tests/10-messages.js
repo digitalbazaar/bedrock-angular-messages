@@ -49,6 +49,37 @@ describe('bedrock-angular-messages', function() {
       messages.count().should.eventually.equal(3);
     });
 
+    it('should navigate newer and older messages', () => {
+      var messages = messageList.messages();
+      messageList.clickMessage(messages.first());
+      messagePage.waitForLoad();
+      $('br-message-viewer').getText()
+        .should.eventually.contain('(6) An important message for you.');
+      messagePage.older().isPresent().should.eventually.be.true;
+      messagePage.newer().isPresent().should.eventually.be.false;
+      messagePage.older().click();
+      $('br-message-viewer').getText()
+        .should.eventually.contain('(7) An important message for you.');
+      messagePage.older().isPresent().should.eventually.be.true;
+      messagePage.newer().isPresent().should.eventually.be.true;
+      messagePage.older().click();
+      $('br-message-viewer').getText()
+        .should.eventually.contain('(8) An important message for you.');
+      messagePage.older().isPresent().should.eventually.be.false;
+      messagePage.newer().isPresent().should.eventually.be.true;
+      messagePage.newer().click();
+      $('br-message-viewer').getText()
+        .should.eventually.contain('(7) An important message for you.');
+      messagePage.older().isPresent().should.eventually.be.true;
+      messagePage.newer().isPresent().should.eventually.be.true;
+      messagePage.newer().click();
+      $('br-message-viewer').getText()
+        .should.eventually.contain('(6) An important message for you.');
+      messagePage.older().isPresent().should.eventually.be.true;
+      messagePage.newer().isPresent().should.eventually.be.false;
+      messagePage.returnButton().click();
+    });
+
     it('archive tab should have 5 messages', function() {
       messageList.archiveTab(true);
       var messages = messageList.messages();

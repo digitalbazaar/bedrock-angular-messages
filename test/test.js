@@ -33,10 +33,11 @@ bedrock.events.on('bedrock-express.configure.routes', app => {
 // create mock messages
 bedrock.events.on('bedrock-identity.postInsert', (e, callback) => {
   let newMessages = [];
+  let now = Date.now();
   for(var i = 1; i < 9; ++i) {
     newMessages.push({
       '@context': 'https://example.com/someContext',
-      date: new Date().toJSON(),
+      date: new Date(now - (86400000 * i)).toJSON(),
       recipient: e.identity.id,
       sender: 'did:9806452c-7190-4f05-b090-99fec665d6d2',
       subject: '(' + i + ') ' + 'An important message for you.',

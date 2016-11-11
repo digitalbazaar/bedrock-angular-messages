@@ -41,10 +41,9 @@ function Ctrl(
           return new Date(message1.content.date).getTime() -
             new Date(message2.content.date).getTime();
         });
+
         // Take the message's index so we can operate previous/next
-        self.index = self.messages.findIndex(function(message) {
-          return message.id === $routeParams.id;
-        });
+        self.index = findMessageIndex(self.messages);
       });
     })
     .catch(function(err) {
@@ -89,6 +88,15 @@ function Ctrl(
         self.showFailAlert = true;
       });
   };
+
+  function findMessageIndex(messages) {
+    for(var i = 0; i < messages.length; ++i) {
+      if(messages[i].id === $routeParams.id) {
+        return i;
+      }
+    }
+    return -1;
+  }
 }
 
 return register;
