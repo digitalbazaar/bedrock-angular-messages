@@ -58,21 +58,25 @@ describe('bedrock-angular-messages', function() {
       messagePage.older().isPresent().should.eventually.be.true;
       messagePage.newer().isPresent().should.eventually.be.false;
       messagePage.older().click();
+      messagePage.waitForLoad();
       $('br-message-viewer').getText()
         .should.eventually.contain('(7) An important message for you.');
       messagePage.older().isPresent().should.eventually.be.true;
       messagePage.newer().isPresent().should.eventually.be.true;
       messagePage.older().click();
+      messagePage.waitForLoad();
       $('br-message-viewer').getText()
         .should.eventually.contain('(8) An important message for you.');
       messagePage.older().isPresent().should.eventually.be.false;
       messagePage.newer().isPresent().should.eventually.be.true;
       messagePage.newer().click();
+      messagePage.waitForLoad();
       $('br-message-viewer').getText()
         .should.eventually.contain('(7) An important message for you.');
       messagePage.older().isPresent().should.eventually.be.true;
       messagePage.newer().isPresent().should.eventually.be.true;
       messagePage.newer().click();
+      messagePage.waitForLoad();
       $('br-message-viewer').getText()
         .should.eventually.contain('(6) An important message for you.');
       messagePage.older().isPresent().should.eventually.be.true;

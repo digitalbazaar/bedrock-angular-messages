@@ -31,4 +31,5 @@ api.returnButton = function() {
 
 api.waitForLoad = function() {
   browser.wait(EC.visibilityOf($('br-message-viewer')), 3000);
+  browser.wait(EC.invisibilityOf($('i.fa-spin')), 3000);
 };
