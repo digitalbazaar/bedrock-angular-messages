@@ -1,5 +1,15 @@
 # bedrock-angular-messages ChangeLog
 
+## 3.0.0 - 2016-11-11
+
+### Changed
+- **Breaking Change** Remove Promise wrappers around `messages-service` API
+  functions.
+- Add Protractor test framework.
+
+### Fixed
+- Replace ES6 `findIndex` call.
+
 ## 2.0.2 - 2016-09-27
 
 ### Fixed
