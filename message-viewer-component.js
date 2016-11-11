@@ -48,11 +48,13 @@ function Ctrl(
       });
     })
     .catch(function(err) {
-      brAlertService.add('error', err, {scope: $scope});
+      brAlertService.add('error', err, {scope: $scope})
+        .then(function() {
+          $scope.$apply();
+        });
     })
     .then(function() {
       self.loading = false;
-      $scope.$apply();
     });
 
   self.view = function(id) {
@@ -76,8 +78,6 @@ function Ctrl(
         self.viewMessages();
       }).catch(function(error) {
         self.showFailAlert = true;
-      }).then(function() {
-        $scope.$apply();
       });
   };
 
@@ -87,8 +87,6 @@ function Ctrl(
         self.viewMessages();
       }).catch(function(error) {
         self.showFailAlert = true;
-      }).then(function() {
-        $scope.$apply();
       });
   };
 }

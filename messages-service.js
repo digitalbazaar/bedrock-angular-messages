@@ -23,8 +23,7 @@ function factory($http, config) {
   }
 
   service.get = function(id) {
-    return Promise.resolve(
-      $http({method: 'GET', url: messagesEndpoint + '?id=' + id}));
+    return $http({method: 'GET', url: messagesEndpoint + '?id=' + id});
   };
   service.getAll = function(options) {
     var url = messagesEndpoint;
@@ -38,25 +37,23 @@ function factory($http, config) {
       query = query.splice(0, -1);  // Remove trailing &
     }
 
-    return Promise.resolve(
-      $http({
-        method: 'GET',
-        url: url + query,
-        headers: {
-          'Accept': 'application/ld+json, application/json'
-        }
-      })).then(function(results) {
-        var messages = results.data;
-        service.unreadCount = messages.filter(function(message) {
-          return !message.meta.read && !message.meta.archived;
-        }).length;
-        return results;
-      });
+    return $http({
+      method: 'GET',
+      url: url + query,
+      headers: {
+        'Accept': 'application/ld+json, application/json'
+      }
+    }).then(function(results) {
+      var messages = results.data;
+      service.unreadCount = messages.filter(function(message) {
+        return !message.meta.read && !message.meta.archived;
+      }).length;
+      return results;
+    });
   };
 
   service.delete = function(message) {
-    return Promise.resolve(
-      $http.delete(messagesEndpoint + '?id=' + message.id));
+    return $http.delete(messagesEndpoint + '?id=' + message.id);
   };
 
   service.deleteBatch = function(messages) {
@@ -68,13 +65,12 @@ function factory($http, config) {
       };
       request.push(operation);
     });
-    return Promise.resolve(
-      $http({
-        url: messagesEndpoint,
-        method: 'PATCH',
-        data: JSON.stringify(request),
-        headers: {'Content-Type': 'application/json;charset=utf-8'}
-      }));
+    return $http({
+      url: messagesEndpoint,
+      method: 'PATCH',
+      data: JSON.stringify(request),
+      headers: {'Content-Type': 'application/json;charset=utf-8'}
+    });
   };
 
   service.archive = function(message) {
@@ -85,13 +81,12 @@ function factory($http, config) {
     };
     request.push(operation);
 
-    return Promise.resolve(
-      $http({
-        url: messagesEndpoint,
-        method: 'PATCH',
-        data: JSON.stringify(request),
-        headers: {'Content-Type': 'application/json;charset=utf-8'}
-      }));
+    return $http({
+      url: messagesEndpoint,
+      method: 'PATCH',
+      data: JSON.stringify(request),
+      headers: {'Content-Type': 'application/json;charset=utf-8'}
+    });
   };
 
   service.archiveBatch = function(messages) {
@@ -104,13 +99,12 @@ function factory($http, config) {
       request.push(operation);
     });
 
-    return Promise.resolve(
-      $http({
-        url: messagesEndpoint,
-        method: 'PATCH',
-        data: JSON.stringify(request),
-        headers: {'Content-Type': 'application/json;charset=utf-8'}
-      }));
+    return $http({
+      url: messagesEndpoint,
+      method: 'PATCH',
+      data: JSON.stringify(request),
+      headers: {'Content-Type': 'application/json;charset=utf-8'}
+    });
   };
 
   service.setMessageListUrl = function(url) {

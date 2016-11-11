@@ -42,10 +42,7 @@ function Ctrl($interval, $location, $route, $scope, brMessagesService) {
   }
 
   function checkMessages() {
-    brMessagesService.getAll()
-      .then(function() {
-        $scope.$apply();
-      });
+    brMessagesService.getAll();
   }
 }
 

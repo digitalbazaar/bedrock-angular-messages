@@ -65,7 +65,6 @@ function Ctrl($location, $scope, $timeout, brMessagesService) {
       });
       processMessageLists();
       self.loading = false;
-      $scope.$apply();
     });
 
   self.view = function(id) {
@@ -141,11 +140,9 @@ function Ctrl($location, $scope, $timeout, brMessagesService) {
         self.showDeleteSuccessAlert = true;
         self.showDeleteFailAlert = false;
         processMessageLists();
-        $scope.$apply();
       }).catch(function(error) {
         self.showDeleteFailAlert = true;
         self.showDeleteSuccessAlert = false;
-        $scope.$apply();
       });
   };
 
@@ -165,11 +162,9 @@ function Ctrl($location, $scope, $timeout, brMessagesService) {
         self.showDeleteSuccessAlert = true;
         self.showDeleteFailAlert = false;
         processMessageLists();
-        $scope.$apply();
       }).catch(function(error) {
         self.showDeleteFailAlert = true;
         self.showDeleteSuccessAlert = false;
-        $scope.$apply();
       });
   };
 
