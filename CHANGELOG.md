@@ -1,5 +1,10 @@
 # bedrock-angular-messages ChangeLog
 
+## 3.0.2 - 2017-03-07
+
+### Changed
+- Update test suite.
+
 ## 3.0.1 - 2016-11-11
 
 ### Fixed
