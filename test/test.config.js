@@ -7,9 +7,6 @@ var path = require('path');
 
 // mongodb config
 config.mongodb.name = 'bedrock_angular_messages_test';
-config.mongodb.host = 'localhost';
-config.mongodb.port = 27017;
-config.mongodb.local.collection = 'bedrock_angular_messages_test';
 // drop all collections on initialization
 config.mongodb.dropCollections = {};
 config.mongodb.dropCollections.onInit = true;
@@ -17,6 +14,8 @@ config.mongodb.dropCollections.collections = [];
 
 config.protractor.config.suites['general'] =
   path.join(__dirname, 'protractor', 'tests', '**', '*.js');
+
+config.protractor.config.mochaOpts.reporter = 'tap';
 
 // default multiCapabilities, used with Sauce Labs
 var caps = config.sauceLabs.capabilities;
