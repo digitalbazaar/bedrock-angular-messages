@@ -1,5 +1,8 @@
 # bedrock-angular-messages ChangeLog
 
+### Fixed
+- Initialize component via `$onInit`.
+
 ## 3.0.2 - 2017-03-07
 
 ### Changed
