@@ -1,16 +1,8 @@
 /*!
- * Copyright (c) 2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
  */
-define([], function() {
-
-'use strict';
-
-function register(module) {
-  module.service('brMessagesService', factory);
-}
-
 /* @ngInject */
-function factory($http, config) {
+export default function factory($http, config) {
   var service = {};
   service.unreadCount = 0;
   var messagesEndpoint =
@@ -34,7 +26,7 @@ function factory($http, config) {
       for(var option in options) {
         query = query + option + '=' + options[option] + '&';
       }
-      query = query.splice(0, -1);  // Remove trailing &
+      query = query.splice(0, -1); // Remove trailing &
     }
 
     return $http({
@@ -113,7 +105,3 @@ function factory($http, config) {
 
   return service;
 }
-
-return register;
-
-});

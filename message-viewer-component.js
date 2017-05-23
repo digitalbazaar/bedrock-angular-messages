@@ -1,17 +1,10 @@
 /*!
- * Copyright (c) 2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
  */
-define([], function() {
-
-'use strict';
-
-function register(module) {
-  module.component('brMessageViewer', {
-    controller: Ctrl,
-    templateUrl: requirejs.toUrl(
-      'bedrock-angular-messages/message-viewer-component.html')
-  });
-}
+export default {
+  controller: Ctrl,
+  templateUrl: 'bedrock-angular-messages/message-viewer-component.html'
+};
 
 /* @ngInject */
 function Ctrl(
@@ -24,10 +17,10 @@ function Ctrl(
     .then(function(result) {
       self.message = result.data;
     })
-      // TODO: In order to operate prev/next buttons, we have to pull
-      // in all of the user's messages -- would be nice if
-      // there was an endpoint that only pulled in a limited
-      // number of the user's messages
+    // TODO: In order to operate prev/next buttons, we have to pull
+    // in all of the user's messages -- would be nice if
+    // there was an endpoint that only pulled in a limited
+    // number of the user's messages
     .then(function() {
       return brMessagesService.getAll().then(function(result) {
         var messages = result.data;
@@ -73,18 +66,18 @@ function Ctrl(
 
   self.delete = function() {
     brMessagesService.delete(self.message)
-      .then(function(result) {
+      .then(function() {
         self.viewMessages();
-      }).catch(function(error) {
+      }).catch(function() {
         self.showFailAlert = true;
       });
   };
 
   self.archive = function() {
     brMessagesService.archive(self.message)
-      .then(function(result) {
+      .then(function() {
         self.viewMessages();
-      }).catch(function(error) {
+      }).catch(function() {
         self.showFailAlert = true;
       });
   };
@@ -98,7 +91,3 @@ function Ctrl(
     return -1;
   }
 }
-
-return register;
-
-});

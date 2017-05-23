@@ -1,22 +1,15 @@
 /*!
  * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
  */
-define([], function() {
-
-'use strict';
-
 /* @ngInject */
-function register(module) {
-  module.component('brMessagesNotification', {
-    bindings: {
-      id: '<brId',
-      identityUrl: '<?brIdentityUrl'
-    },
-    controller: Ctrl,
-    templateUrl: requirejs.toUrl(
-      'bedrock-angular-messages/messages-notification-component.html')
-  });
-}
+export default {
+  bindings: {
+    id: '<brId',
+    identityUrl: '<?brIdentityUrl'
+  },
+  controller: Ctrl,
+  templateUrl: 'bedrock-angular-messages/messages-notification-component.html'
+};
 
 function Ctrl($interval, $location, $route, $scope, brMessagesService) {
   var self = this;
@@ -26,7 +19,7 @@ function Ctrl($interval, $location, $route, $scope, brMessagesService) {
     self.messagesService = brMessagesService;
     brMessagesService.setMessageListUrl(self.identityUrl + '/messages');
     init();
-  }
+  };
 
   self.viewMessages = function() {
     if($location.url() === self.identityUrl + '/messages') {
@@ -48,7 +41,3 @@ function Ctrl($interval, $location, $route, $scope, brMessagesService) {
     brMessagesService.getAll();
   }
 }
-
-return register;
-
-});

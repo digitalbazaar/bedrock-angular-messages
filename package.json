@@ -1,0 +1,23 @@
+{
+  "name": "bedrock-angular-messages",
+  "version": "3.0.3",
+  "description": "bedrock-angular-messages",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "~1.6.4",
+    "bedrock-angular-alert": "^3.0.0",
+    "bedrock-angular-paging": "^2.0.0",
+    "angular-sanitize": "~1.6.4"
+  },
+  "bedrock": {
+    "browserDependencies": "all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalbazaar/bedrock-angular-messages.git"
+  },
+  "bugs": {
+    "url": "https://github.com/digitalbazaar/bedrock-angular-messages/issues"
+  },
+  "homepage": "https://github.com/digitalbazaar/bedrock-angular-messages#readme"
+}

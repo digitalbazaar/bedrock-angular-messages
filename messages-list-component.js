@@ -1,17 +1,10 @@
 /*!
- * Copyright (c) 2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
  */
-define([], function() {
-
-'use strict';
-
-function register(module) {
-  module.component('brMessages', {
-    controller: Ctrl,
-    templateUrl: requirejs.toUrl(
-      'bedrock-angular-messages/messages-list-component.html')
-  });
-}
+export default {
+  controller: Ctrl,
+  templateUrl: 'bedrock-angular-messages/messages-list-component.html'
+};
 
 /* @ngInject */
 function Ctrl($location, $scope, $timeout, brMessagesService) {
@@ -130,8 +123,8 @@ function Ctrl($location, $scope, $timeout, brMessagesService) {
       return message.id;
     });
     brMessagesService.deleteBatch(selectedIds)
-      .then(function(response) {
-        selectedMessages.forEach(function(message, i, array) {
+      .then(function() {
+        selectedMessages.forEach(function(message) {
           var index = allMessages.indexOf(message);
           if(index >= 0) {
             allMessages.splice(index, 1);
@@ -140,7 +133,7 @@ function Ctrl($location, $scope, $timeout, brMessagesService) {
         self.showDeleteSuccessAlert = true;
         self.showDeleteFailAlert = false;
         processMessageLists();
-      }).catch(function(error) {
+      }).catch(function() {
         self.showDeleteFailAlert = true;
         self.showDeleteSuccessAlert = false;
       });
@@ -154,7 +147,7 @@ function Ctrl($location, $scope, $timeout, brMessagesService) {
       return message.id;
     });
     brMessagesService.archiveBatch(selectedIds)
-      .then(function(result) {
+      .then(function() {
         // Mark selected objects as archived
         selectedMessages.forEach(function(message) {
           message.meta.archived = true;
@@ -162,7 +155,7 @@ function Ctrl($location, $scope, $timeout, brMessagesService) {
         self.showDeleteSuccessAlert = true;
         self.showDeleteFailAlert = false;
         processMessageLists();
-      }).catch(function(error) {
+      }).catch(function() {
         self.showDeleteFailAlert = true;
         self.showDeleteSuccessAlert = false;
       });
@@ -204,7 +197,3 @@ function Ctrl($location, $scope, $timeout, brMessagesService) {
     return amount;
   }
 }
-
-return register;
-
-});
