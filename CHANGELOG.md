@@ -1,5 +1,12 @@
 # bedrock-angular-messages ChangeLog
 
+## 4.0.0 - 2017-05-30
+
+### Changed
+- **BREAKING**: Switch package manager from bower to npm.
+- **BREAKING**: Replace requirejs/amd with ES6 import.
+- Angular 1.6.x is required.
+
 ## 3.0.3 - 2017-05-11
 
 ### Fixed
