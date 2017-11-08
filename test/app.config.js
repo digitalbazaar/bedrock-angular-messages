@@ -1,30 +1,31 @@
 /*!
  * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
  */
-var bedrock = require('bedrock');
-var config = bedrock.config;
-var path = require('path');
+const bedrock = require('bedrock');
+const config = bedrock.config;
+const path = require('path');
 
-var dir = path.join(__dirname);
-config.requirejs.bower.packages.push({
+const dir = path.join(__dirname);
+config.views.system.packages.push({
   path: path.join(dir, 'components'),
-  manifest: path.join(dir, 'bower.json')
+  manifest: path.join(dir, 'package.json')
 });
 
-var parentDir = path.join(__dirname, '..');
-config.requirejs.bower.packages.push({
+const parentDir = path.join(__dirname, '..');
+config.views.system.packages.push({
   path: path.join(parentDir),
-  manifest: path.join(parentDir, 'bower.json')
+  manifest: path.join(parentDir, 'package.json')
 });
 
 // mongodb config
 config.mongodb.name = 'bedrock_angular_messages_app';
+/* delete me
 config.mongodb.host = 'localhost';
 config.mongodb.port = 27017;
 config.mongodb.local.collection = 'bedrock_angular_messages_app';
-
-var permissions = config.permission.permissions;
-var roles = config.permission.roles;
+*/
+const permissions = config.permission.permissions;
+const roles = config.permission.roles;
 roles['bedrock-test.identity.registered'] = {
   id: 'bedrock-test.identity.registered',
   label: 'Identity Manager',

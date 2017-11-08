@@ -1,22 +1,22 @@
 /*!
  * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  */
-var bedrock = global.bedrock;
-var protractor = global.protractor;
-var EC = protractor.ExpectedConditions;
-var uuid = require('uuid').v4;
+const bedrock = global.bedrock;
+const protractor = global.protractor;
+const EC = protractor.ExpectedConditions;
+const uuid = require('uuid').v4;
 
-var app = bedrock.pages['bedrock-angular-messages'].app;
-var messagePage = bedrock.pages['bedrock-angular-messages'].message;
-var messageList = bedrock.pages['bedrock-angular-messages'].messageList;
+const app = bedrock.pages['bedrock-angular-messages'].app;
+const messagePage = bedrock.pages['bedrock-angular-messages'].message;
+const messageList = bedrock.pages['bedrock-angular-messages'].messageList;
 
-describe('bedrock-angular-messages', function() {
-  var testIdentity = {
+describe('bedrock-angular-messages', () => {
+  const testIdentity = {
     sysIdentifier: uuid().substr(0, 23),
     password: 'password'
   };
 
-  before(function() {
+  before(() => {
     bedrock.get('/');
     app.createIdentity(testIdentity);
     app.login(testIdentity);
@@ -29,17 +29,17 @@ describe('bedrock-angular-messages', function() {
   });
 
   describe('Messages List', () => {
-    it('should navigate to messages page', function() {
+    it('should navigate to messages page', () => {
       app.messageNotification().click();
       messageList.waitForLoad();
     });
 
-    it('should have 8 messages', function() {
-      var messages = messageList.messages();
+    it('should have 8 messages', () => {
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(8);
     });
 
-    it('should archive 5 messages', function() {
+    it('should archive 5 messages', () => {
       var messages = messageList.messages();
       for(var i = 0; i < 5; ++i) {
         messageList.selectMessage(messages.get(i));
@@ -50,7 +50,7 @@ describe('bedrock-angular-messages', function() {
     });
 
     it('should navigate newer and older messages', () => {
-      var messages = messageList.messages();
+      const messages = messageList.messages();
       messageList.clickMessage(messages.first());
       messagePage.waitForLoad();
       $('br-message-viewer').getText()
@@ -84,79 +84,79 @@ describe('bedrock-angular-messages', function() {
       messagePage.returnButton().click();
     });
 
-    it('archive tab should have 5 messages', function() {
+    it('archive tab should have 5 messages', () => {
       messageList.archiveTab(true);
-      var messages = messageList.messages();
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(5);
     });
 
-    it('should click on first archived message', function() {
-      var messages = messageList.messages();
+    it('should click on first archived message', () => {
+      const messages = messageList.messages();
       messageList.clickMessage(messages.first());
       messagePage.waitForLoad();
     });
 
-    it('should delete the message', function() {
+    it('should delete the message', () => {
       browser.wait(
         EC.elementToBeClickable(element(by.buttonText('Delete'))), 3000);
       messagePage.delete();
       messageList.waitForLoad();
     });
 
-    it('archive tab should be displayed, with 4 messages', function() {
+    it('archive tab should be displayed, with 4 messages', () => {
       messageList.archiveTab().getAttribute('class')
         .should.eventually.equal('active');
-      var messages = messageList.messages();
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(4);
     });
 
-    it('should navigate to inbox tab, with 3 messages', function() {
+    it('should navigate to inbox tab, with 3 messages', () => {
       messageList.inboxTab(true);
-      var messages = messageList.messages();
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(3);
     });
 
-    it('should click on last message', function() {
-      var messages = messageList.messages();
+    it('should click on last message', () => {
+      const messages = messageList.messages();
       messageList.clickMessage(messages.last());
       messagePage.waitForLoad();
     });
 
-    it('should archive message', function() {
+    it('should archive message', () => {
       messagePage.archive();
       messageList.waitForLoad();
     });
 
-    it('inbox page should have 2 messages', function() {
-      var messages = messageList.messages();
+    it('inbox page should have 2 messages', () => {
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(2);
     });
 
-    it('archive tab should have 5 messages', function() {
+    it('archive tab should have 5 messages', () => {
       messageList.archiveTab(true);
-      var messages = messageList.messages();
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(5);
     });
 
-    it('refresh', function() {
+    it('refresh', () => {
       protractor.browser.refresh();
       messageList.waitForLoad();
       messageList.inboxTab().getAttribute('class')
         .should.eventually.equal('active');
     });
 
-    it('inbox page should have 2 messages', function() {
-      var messages = messageList.messages();
+    it('inbox page should have 2 messages', () => {
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(2);
     });
 
-    it('archive tab should have 5 messages', function() {
+    it('archive tab should have 5 messages', () => {
       messageList.archiveTab(true);
-      var messages = messageList.messages();
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(5);
     });
 
-    it('should archive all inboxed messages', function() {
+    it('should archive all inboxed messages', () => {
       messageList.inboxTab(true);
       var messages = messageList.messages();
       messages.each(function(m) {
@@ -167,7 +167,7 @@ describe('bedrock-angular-messages', function() {
       messages.count().should.eventually.equal(0);
     });
 
-    it('should delete all archived messages', function() {
+    it('should delete all archived messages', () => {
       messageList.archiveTab(true);
       var messages = messageList.messages();
       messages.count().should.eventually.equal(7);
@@ -179,21 +179,21 @@ describe('bedrock-angular-messages', function() {
       messages.count().should.eventually.equal(0);
     });
 
-    it('refresh', function() {
+    it('refresh', () => {
       protractor.browser.refresh();
       messageList.waitForLoad();
       messageList.inboxTab().getAttribute('class')
         .should.eventually.equal('active');
     });
 
-    it('inbox page should have 0 messages', function() {
-      var messages = messageList.messages();
+    it('inbox page should have 0 messages', () => {
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(0);
     });
 
-    it('archive tab should have 0 messages', function() {
+    it('archive tab should have 0 messages', () => {
       messageList.archiveTab(true);
-      var messages = messageList.messages();
+      const messages = messageList.messages();
       messages.count().should.eventually.equal(0);
     });
   }); // end message list

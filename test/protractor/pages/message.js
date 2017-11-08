@@ -1,35 +1,35 @@
 /*!
  * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
  */
-var api = {};
+const api = {};
 module.exports = api;
 
-var protractor = global.protractor;
-var EC = protractor.ExpectedConditions;
+const protractor = global.protractor;
+const EC = protractor.ExpectedConditions;
 
-api.archive = function() {
+api.archive = () => {
   element(by.attribute('ng-click', '$ctrl.archive()')).click();
 };
 
-api.delete = function() {
+api.delete = () => {
   element(by.attribute('ng-click', '$ctrl.delete()')).click();
 };
 
-api.newer = function() {
+api.newer = () => {
   return element(by.linkText('Newer'));
 };
 
-api.older = function() {
+api.older = () => {
   return element(by.linkText('Older'));
 };
 
-api.returnButton = function() {
-  var returnButton = element(by.buttonText('Return to Messages'));
+api.returnButton = () => {
+  const returnButton = element(by.buttonText('Return to Messages'));
   browser.wait(EC.elementToBeClickable(returnButton), 3000);
   return returnButton;
 };
 
-api.waitForLoad = function() {
+api.waitForLoad = () => {
   browser.wait(EC.visibilityOf($('br-message-viewer')), 3000);
   browser.wait(EC.invisibilityOf($('i.fa-spin')), 3000);
 };

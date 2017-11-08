@@ -5,13 +5,16 @@
   <br-input br-model="$ctrl.sysSlug"
     br-options="{
       name: 'slug',
-      label: 'Short Name'
+      label: 'Short Name',
+      theme: 'material'
     }">
     <br-input-help>
       Enter a unique short name for this identity.
     </br-input-help>
   </br-input>
-  <button ng-click="$ctrl.addIdentity($ctrl.sysSlug)">Create Identity</button>
+  <md-button ng-click="$ctrl.addIdentity($ctrl.sysSlug)" class="md-primary md-raised">
+    Create Identity
+  </md-button>
 </form>
 <h1>Test Data</h1>
 <pre>{{$ctrl.testData | json}}</pre>
