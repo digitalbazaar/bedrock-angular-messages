@@ -12,10 +12,11 @@
     "bedrock-angular-alert": "digitalbazaar/bedrock-angular-alert#material",
     "bedrock-angular-authn": "digitalbazaar/bedrock-angular-authn#material",
     "bedrock-angular-authn-password": "digitalbazaar/bedrock-angular-authn-password#material",
+    "bedrock-angular-forge": "digitalbazaar/bedrock-angular-forge#implementation",
     "bedrock-angular-form": "^3.1.0",
     "bedrock-angular-identity": "^3.0.0",
     "bedrock-angular-material": "^1.0.0",
-    "bedrock-angular-paging": "^2.0.0",
+    "bedrock-angular-messages": "file:..",
     "bedrock-authn-password": "^3.0.3",
     "bedrock-did-client": "^1.0.0",
     "bedrock-docs": "^2.0.2",
@@ -24,7 +25,6 @@
     "bedrock-identity-http": "^1.0.3",
     "bedrock-key": "^4.0.0",
     "bedrock-mail": "^2.0.3",
-    "bedrock-messages": "^0.1.4",
     "bedrock-mongodb": "^4.0.0",
     "bedrock-passport": "^3.1.7",
     "bedrock-permission": "^2.4.0",
@@ -35,7 +35,6 @@
     "bedrock-validation": "^2.2.1",
     "bedrock-views": "^5.2.1",
     "bedrock-webpack": "^1.1.1",
-    "crypto": "^1.0.1",
     "grunt": "^1.0.1",
     "uuid": "^3.1.0"
   },
@@ -44,11 +43,12 @@
       "bedrock-angular",
       "bedrock-angular-alert",
       "bedrock-angular-authn",
-      "bedrock-angular-form",
-      "bedrock-angular-material",
-      "bedrock-angular-paging",
       "bedrock-angular-authn-password",
-      "bedrock-angular-identity"
+      "bedrock-angular-forge",
+      "bedrock-angular-form",
+      "bedrock-angular-identity",
+      "bedrock-angular-material",
+      "bedrock-angular-messages"
     ]
   }
 }
