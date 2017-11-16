@@ -13,7 +13,7 @@ api.messageNotification = () => {
   return m.element(by.partialLinkText('Messages'));
 };
 
-api.login = (identity) => {
+api.login = identity => {
   element(by.buttonText('Sign In')).click();
   const c = $('br-authn-password');
   c.element(by.brModel('$ctrl.sysIdentifier')).sendKeys(identity.sysIdentifier);
@@ -21,9 +21,12 @@ api.login = (identity) => {
   c.element(by.buttonText('Sign In')).click();
 };
 
-api.createIdentity = (identity) => {
+api.createIdentity = identity => {
   element(by.brModel('$ctrl.sysSlug'))
     .clear()
     .sendKeys(identity.sysIdentifier);
+  element(by.brModel('$ctrl.sysPassword'))
+    .clear()
+    .sendKeys(identity.password);
   element(by.buttonText('Create Identity')).click();
 };

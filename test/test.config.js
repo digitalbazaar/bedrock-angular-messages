@@ -20,6 +20,9 @@ config.protractor.config.mochaOpts.reporter = 'tap';
 // default multiCapabilities, used with Sauce Labs
 const caps = config.sauceLabs.capabilities;
 config.sauceLabs.multiCapabilities = [
-  caps.linux.firefox, caps.linux.chrome, caps.osx1011.safari,
-  caps.osx1010.safari, caps.windows10.ie
+  caps.linux.firefox,
+  caps.linux.chrome,
+  caps.osx1011.safari,
+  caps.osx1010.safari,
+  caps.windows10.ie
 ];

@@ -10,9 +10,9 @@ const util = require('util');
 require('bedrock-protractor');
 require('bedrock-authn-password');
 require('bedrock-identity-http');
+require('bedrock-session-http');
 require('bedrock-views');
 require('bedrock-webpack');
-
 require('./app.config');
 
 bedrock.events.on('bedrock-express.configure.routes', app =>
@@ -20,6 +20,7 @@ bedrock.events.on('bedrock-express.configure.routes', app =>
     const identity = {};
     identity['@context'] = bedrock.config.constants.IDENTITY_CONTEXT_V1_URL;
     identity.id = createIdentityId(req.body.sysSlug);
+    identity.email = req.body.email;
     identity.type = 'Identity';
     identity.sysSlug = req.body.sysSlug;
     identity.sysResourceRole = req.body.sysResourceRole;
@@ -33,13 +34,13 @@ bedrock.events.on('bedrock-express.configure.routes', app =>
 bedrock.events.on('bedrock-identity.postInsert', (e, callback) => {
   const newMessages = [];
   const now = Date.now();
-  for(var i = 1; i < 9; ++i) {
+  for(var i = 1; i < 9; i++) {
     newMessages.push({
       '@context': 'https://example.com/someContext',
       date: new Date(now - (86400000 * i)).toJSON(),
       recipient: e.identity.id,
       sender: 'did:9806452c-7190-4f05-b090-99fec665d6d2',
-      subject: '(${i}) An important message for you.',
+      subject: `(${i}) An important message for you.`,
       type: 'SomeMessageType',
       content: {
         body: 'Here is an important message.'

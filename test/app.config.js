@@ -19,11 +19,7 @@ config.views.system.packages.push({
 
 // mongodb config
 config.mongodb.name = 'bedrock_angular_messages_app';
-/* delete me
-config.mongodb.host = 'localhost';
-config.mongodb.port = 27017;
-config.mongodb.local.collection = 'bedrock_angular_messages_app';
-*/
+
 const permissions = config.permission.permissions;
 const roles = config.permission.roles;
 roles['bedrock-test.identity.registered'] = {

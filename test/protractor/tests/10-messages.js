@@ -12,7 +12,7 @@ const messageList = bedrock.pages['bedrock-angular-messages'].messageList;
 
 describe('bedrock-angular-messages', () => {
   const testIdentity = {
-    sysIdentifier: uuid().substr(0, 23),
+    sysIdentifier: `${uuid().substr(0, 23)}@bedrock.local`,
     password: 'password'
   };
 
@@ -24,6 +24,7 @@ describe('bedrock-angular-messages', () => {
 
   describe('br-messages-notification', () => {
     it('should indicate 8 messages', () => {
+      browser.sleep(10000);
       app.messageNotification().getText().should.eventually.equal('Messages 8');
     });
   });

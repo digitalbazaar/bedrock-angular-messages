@@ -7,8 +7,8 @@ import TestHarnessComponent from './test-harness-component.js';
 
 const module = angular.module('bedrock.messages-test', [
   'bedrock.alert', 'bedrock.authn', 'bedrock.authn-password',
-  'bedrock.forge', 'bedrock.form', 'bedrock.identity',
-  'bedrock.messages', 'ngMaterial'
+  'bedrock.form', 'bedrock.identity', 'bedrock.messages',
+  'ngMaterial', 'ngMessages'
 ]);
 
 bedrock.setRootModule(module);
@@ -24,7 +24,7 @@ module.config($routeProvider => {
     })
     .when('/messages', {
       title: 'Messages Test',
-      template: '<br-messages></br-messages>'
+      template: '<br-messages-list></br-messages-list>'
     })
     .when('/messages/:id', {
       title: 'Message',
