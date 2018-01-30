@@ -3,9 +3,9 @@
  */
 /* @ngInject */
 export default function factory($http, config) {
-  var service = {};
+  const service = {};
   service.unreadCount = 0;
-  var messagesEndpoint =
+  const messagesEndpoint =
     config.data['bedrock-angular-messages'].endpoints.messages;
   service.messageListUrl = '';
   if(!messagesEndpoint) {
@@ -14,11 +14,12 @@ export default function factory($http, config) {
       'bedrock-messages installed on the server?');
   }
 
-  service.get = function(id) {
+  service.get = id => {
     return $http({method: 'GET', url: messagesEndpoint + '?id=' + id});
   };
-  service.getAll = function(options) {
-    var url = messagesEndpoint;
+
+  service.getAll = options => {
+    const url = messagesEndpoint;
 
     var query = '';
     if(options) {
@@ -35,23 +36,23 @@ export default function factory($http, config) {
       headers: {
         'Accept': 'application/ld+json, application/json'
       }
-    }).then(function(results) {
-      var messages = results.data;
-      service.unreadCount = messages.filter(function(message) {
+    }).then(results => {
+      const messages = results.data;
+      service.unreadCount = messages.filter(message => {
         return !message.meta.read && !message.meta.archived;
       }).length;
       return results;
     });
   };
 
-  service.delete = function(message) {
+  service.delete = message => {
     return $http.delete(messagesEndpoint + '?id=' + message.id);
   };
 
-  service.deleteBatch = function(messages) {
-    var request = [];
+  service.deleteBatch = messages => {
+    const request = [];
     messages.forEach(function(message) {
-      var operation = {
+      const operation = {
         op: 'delete',
         id: message
       };
@@ -65,9 +66,9 @@ export default function factory($http, config) {
     });
   };
 
-  service.archive = function(message) {
-    var request = [];
-    var operation = {
+  service.archive = message => {
+    const request = [];
+    const operation = {
       op: 'archive',
       id: message.id
     };
@@ -81,16 +82,15 @@ export default function factory($http, config) {
     });
   };
 
-  service.archiveBatch = function(messages) {
-    var request = [];
-    messages.forEach(function(message) {
-      var operation = {
+  service.archiveBatch = messages => {
+    const request = [];
+    messages.forEach(message => {
+      const operation = {
         op: 'archive',
         id: message
       };
       request.push(operation);
     });
-
     return $http({
       url: messagesEndpoint,
       method: 'PATCH',
@@ -99,7 +99,7 @@ export default function factory($http, config) {
     });
   };
 
-  service.setMessageListUrl = function(url) {
+  service.setMessageListUrl = url => {
     service.messageListUrl = url;
   };
 

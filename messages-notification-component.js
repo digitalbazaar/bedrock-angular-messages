@@ -14,7 +14,7 @@ export default {
 function Ctrl($interval, $location, $route, $scope, brMessagesService) {
   var self = this;
 
-  self.$onInit = function() {
+  self.$onInit = () => {
     self.identityUrl = self.identityUrl || '';
     self.messagesService = brMessagesService;
     brMessagesService.setMessageListUrl(self.identityUrl + '/messages');

@@ -8,8 +8,9 @@ import MessagesNotificationComponent from
   './messages-notification-component.js';
 import MessagesService from './messages-service.js';
 
-var module = angular.module('bedrock.messages', [
-  'bedrock.alert', 'bedrock.paging', 'ngSanitize'
+const module = angular.module('bedrock.messages', [
+  'bedrock.alert', 'bedrock.paging', 'md.data.table',
+  'ngSanitize', 'ngMaterial'
 ]);
 
 module.component('brMessagesList', MessagesListComponent);

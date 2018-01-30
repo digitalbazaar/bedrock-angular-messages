@@ -105,8 +105,8 @@ describe('bedrock-angular-messages', () => {
     });
 
     it('archive tab should be displayed, with 4 messages', () => {
-      messageList.archiveTab().getAttribute('class')
-        .should.eventually.equal('active');
+      messageList.archiveTab().getAttribute('aria-selected')
+        .should.eventually.equal('true');
       const messages = messageList.messages();
       messages.count().should.eventually.equal(4);
     });
@@ -142,8 +142,8 @@ describe('bedrock-angular-messages', () => {
     it('refresh', () => {
       protractor.browser.refresh();
       messageList.waitForLoad();
-      messageList.inboxTab().getAttribute('class')
-        .should.eventually.equal('active');
+      messageList.inboxTab().getAttribute('aria-selected')
+        .should.eventually.equal('true');
     });
 
     it('inbox page should have 2 messages', () => {
@@ -183,8 +183,8 @@ describe('bedrock-angular-messages', () => {
     it('refresh', () => {
       protractor.browser.refresh();
       messageList.waitForLoad();
-      messageList.inboxTab().getAttribute('class')
-        .should.eventually.equal('active');
+      messageList.inboxTab().getAttribute('aria-selected')
+        .should.eventually.equal('tue');
     });
 
     it('inbox page should have 0 messages', () => {

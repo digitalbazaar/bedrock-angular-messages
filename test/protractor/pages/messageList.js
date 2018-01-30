@@ -7,12 +7,12 @@ module.exports = api;
 api.waitForLoad = () => {
   browser.wait(() => {
     return browser.isElementPresent(
-      by.attribute('ng-click', '$ctrl.inboxTab()'));
+      by.attribute('ng-click', '$mdTabsCtrl.select(tab.getIndex())'));
   }, 8000);
 };
 
 api.inboxTab = select => {
-  const inboxElement = element(by.attribute('ng-click', '$ctrl.inboxTab()'));
+  const inboxElement = element.all(by.tagName('md-tab-item')).first();
   if(!select) {
     return inboxElement;
   }
@@ -20,8 +20,7 @@ api.inboxTab = select => {
 };
 
 api.archiveTab = select => {
-  const archiveElement = element(
-    by.attribute('ng-click', '$ctrl.archiveTab()'));
+  const archiveElement = element.all(by.tagName('md-tab-item')).last();
   if(!select) {
     return archiveElement;
   }
@@ -39,7 +38,7 @@ api.clickMessage = message => {
 };
 
 api.selectMessage = message => {
-  message.element(by.model('message.selected')).click();
+  message.element(by.attribute('ng-click', '$mdSelect.toggle($event)')).click();
 };
 
 api.archiveSelected = () => {

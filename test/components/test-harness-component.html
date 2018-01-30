@@ -1,5 +1,13 @@
-<br-authn-login br-display-login="$ctrl.showLogin"></br-authn-login>
-<br-messages-notification ng-if="$ctrl.authenticated" br-id="$ctrl.testData.id"></br-messages-notification>
+
+<div layout="row">
+  <div flex="50">
+    <br-authn-login br-display-login="$ctrl.showLogin"></br-authn-login>
+  </div>
+  <div flex="50">
+    <br-messages-notification ng-if="$ctrl.authenticated" br-id="$ctrl.testData.id"></br-messages-notification>
+  </div>
+</div>
+
 <h1>Create Identity</h1>
 <form name="$ctrl.identityForm" class="br-flex-vertical-children br-flex-stretch-children-width">
   <br-input br-model="$ctrl.sysSlug"
